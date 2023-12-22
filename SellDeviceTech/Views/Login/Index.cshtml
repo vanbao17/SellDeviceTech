@@ -1,0 +1,65 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutContainer.cshtml";
+}
+@model SellDeviceTech.Models.Customers
+<div class="breadcrumb-area">
+    <div class="container">
+        <div class="breadcrumb-content">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li class="active">Login Register</li>
+            </ul>
+        </div>
+    </div>
+</div>
+<!-- Li's Breadcrumb Area End Here -->
+<!-- Begin Login Content Area -->
+<div class="page-section mb-60">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12 col-md-12 col-xs-12 col-lg-6 mb-30 justify-content-center">
+                <!-- Login Form s-->
+                <form action="/Login/ActionSignIn">
+                    <div class="login-form">
+                        <h4 class="login-title">Login</h4>
+                        <div class="row">
+                            <div class="col-md-12 col-12 mb-20">
+                                <label>Email Address*</label>
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = " mb-0" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-12 mb-20">
+                                <label>Password</label>
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control mb-0" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+                            <div class="col-md-8">
+                                <div class="check-box d-inline-block ml-0 ml-md-2 mt-10">
+                                    <input type="checkbox" id="remember_me">
+                                    <label for="remember_me">Remember me</label>
+                                </div>
+                            </div>
+                            <div class="col-md-4 mt-10 mb-20 text-left text-md-right">
+                                <a href="#"> Forgotten pasward?</a>
+                            </div>
+                            <div>
+                                <a href="@Url.Action("Index","Signup")"> You don't have a account ?</a>
+                            </div>
+                            <div class="col-md-12">
+                                <button class="register-button mt-0">Login</button>
+                            </div>
+
+                        </div>
+                    </div>
+                </form>
+                <form action="@Url.Action("LoginWithGooglePlus", "Login")" method="post">
+                    @Html.AntiForgeryToken()
+                    <button type="submit" class="btn btn-danger"><i class="fa fa-google-plus"></i>  Login with Google + </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

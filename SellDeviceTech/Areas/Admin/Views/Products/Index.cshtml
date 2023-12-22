@@ -1,0 +1,78 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout_Admin.cshtml";
+}
+
+@model List<SellDeviceTech.Models.Products>
+<div id="content-page" class="content-page">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="iq-card">
+                    <div class="iq-card-header d-flex justify-content-between">
+                        <div class="iq-header-title">
+                            <h4 class="card-title">Danh sách sách</h4>
+                        </div>
+                        <div class="iq-card-header-toolbar d-flex align-items-center">
+                            <a href="@Url.Action("Index","AddProduct")" class="btn btn-primary">Thêm sản phẩm</a>
+                        </div>
+                    </div>
+                    <div class="iq-card-body">
+                        <div class="table-responsive">
+                            <table class="data-tables table table-striped table-bordered" style="width:100%">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 3%;">STT</th>
+                                        <th style="width: 12%;">Hình ảnh</th>
+                                        <th style="width: 15%;">Tên sản phẩm</th>
+                                        <th style="width: 15%;">Thể loại sản phẩm</th>
+                                        <th style="width: 18%;">Mô tả sách</th>
+                                        <th style="width: 10%;">Giá</th>
+                                        <th style="width: 15%;">Hoạt động</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model)
+                                    {
+                                        <tr>
+                                            <td>@item.IdProduct</td>
+                                            <td><img class="img-fluid rounded" src="~/Assets/images/product/@item.Image" alt=""></td>
+                                            <td>@item.TitleProduct</td>
+                                            <td>
+                                                @if (@ViewBag.Cate != null)
+                                                {
+                                                    var cates = (List<SellDeviceTech.Models.Cates>)ViewBag.Cate;
+                                                    foreach (var item1 in cates)
+                                                    {
+                                                        if (item1.IdCate == item.IdCate)
+                                                        {
+                                                            <span>@item1.Title</span>
+                                                        }
+                                                    }
+                                                }
+                                            </td>
+                                            <td>
+                                                <p class="mb-0">@item.Description </p>
+                                            </td>
+                                            <td>@item.Price$</td>
+                                            <td>
+                                                <div class="flex align-items-center list-user-action">
+
+                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Edit" href="@Url.Action("Index", "Update", new { masanpham = @item.IdProduct })"><i class="ri-pencil-line"></i></a>
+                                                    <a class="bg-primary" data-toggle="tooltip" data-placement="top" title="" data-original-title="Xoá" href="@Url.Action("XoaSach", "Products", new { masp = @item.IdProduct })"><i class="ri-delete-bin-line"></i></a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
